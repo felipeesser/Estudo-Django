@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block corpo %}
+<header>
+        <nav class="navbar navbar-dark navbar-expand-md fixed-top" style="background-color: #212529;">
+            <div class="container">
+                <a href="../../" class="navbar-brand font-weight-bold">Ingresso.com</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu"
+                    aria-controls="menu" aria-expanded="false" aria-label="Botão de Navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="menu" class="collapse navbar-collapse">
+                    <div class="navbar-nav ml-auto">
+                        <a data-toggle="popover" data-html="true" title="<a href='#'>Meus pedidos</a>"
+                            data-content="<a href='#'>Dados Pessoais</a><br><a href='#'>Formas de Pagamento</a><br><a href='#'>Sair da conta</a>"
+                            data-placement="bottom" class="nav-item nav-link" href="#">Olá, Visitante <i
+                                class="fas fa-user"></i><span class="badge badge-dark">1</span>
+                            <span class="sr-only">unread messages</span></a>
+                        <a class="nav-item nav-link" href="../atendimento/">Atendimento <i class="far fa-question-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <form action="{% url 'noticia:cadastro_noticia' %}" method="post" class="pb-4 mt-5 pt-4 container" novalidate>
+
+            <div class="row mb-3">
+                <label class="col-2 font-weight-bold">Titulo</label>
+                <div class="col-10">
+                    {{form.titulo}}
+                    {% if form.titulo.errors %}
+                        <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                            {% for erro in form.titulo.errors %}
+                            <small>{{ erro }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-2 font-weight-bold">Corpo</label>
+                <div class="col-10">
+                    {{form.corpo}}
+                    {% if form.corpo.errors %}
+                        <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                            {% for erro in form.corpo.errors %}
+                            <small>{{ erro }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-2 font-weight-bold">Imagem</label>
+                <div class="col-10">
+                    {{form.imagem}}
+                    {% if form.imagem.errors %}
+                        <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                            {% for erro in form.imagem.errors %}
+                            <small>{{ erro }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% csrf_token %}
+            <button id="botao" type="submit" class="btn btn-primary">
+                {% if 'noticia_id' in request.session %}
+                Alterar
+                {% else %}
+                Cadastrar
+                {% endif %}
+            </button>
+    </form>
+{% endblock %}

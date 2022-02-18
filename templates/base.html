@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Title</title>
+      <link href="{% static 'css/bootstrap4.css' %}" rel="stylesheet">
+  <link href="{% static 'css/all.css' %}" rel="stylesheet">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body class="d-flex" style="flex-direction:column; min-height:100vh">
+    <div style="flex:1">
+      {% block corpo%}
+      {% endblock %}
+    </div>
+
+    {%block rodape%}
+    <div class="footer mb-md-0" style="margin-bottom: 48px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-4 col-lg-3 col-sm-7">
+              <h5>Menu</h5>
+              <ul class="list-unstyled">
+                <li><a href='#excursoes'> Filmes</a></li>
+                <li><a href='#excursoes'>Cinemas</a></li>
+                <li><a href='#excursoes'>Eventos</a></li>
+              </ul>
+            </div>
+
+            <div class="col-xl-3 col-lg-3 col-sm-5">
+              <h5>Institucional</h5>
+              <ul class="list-unstyled">
+                <li><a href='#'>Quem somos</a></li>
+                <li><a href='#'>Acessoria de Imprensa</a></li>
+                <li><a href='#'>Bootstrap Ingresso.com</a></li>
+                <li><a href='#'>Vale-Presente Corporativo</a></li>
+                <li><a href='#'>Ingresso.com atende</a></li>
+                <li><a href='#'>movieID.com</a></li>
+                <li><a href='#'>Faça parte do time</a></li>
+              </ul>
+            </div>
+
+            <div class="col-xl-3 col-lg-3 col-sm-7">
+              <h5>Políticas</h5>
+              <ul class="list-unstyled">
+                <li><a href='#'>Prevenções</a></li>
+                <li><a href='#'>Privacidade e Segurança</a></li>
+                <li><a href='#'>Política de Cookies</a></li>
+                <li><a href='#'>Meia-entrada</a></li>
+                <li><a href='#'>Troca e Cancelamentos</a></li>
+                <li><a href='#'>Leis Estaduais e Municipais</a></li>
+                <li><a href='#'>Termos de Uso</a></li>
+              </ul>
+            </div>
+
+            <div class="col-xl-2 col-lg-3 col-sm-5">
+              <h5>Dúvidas</h5>
+              <ul class="list-unstyled">
+                <li><a href='#'>Atendimento</a></li>
+                <li><a href='#'>Site ou e-mails falsos</a></li>
+                <li><a href='#'>Procon-RJ</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    {% endblock %}
+
+<script src="{% static 'js/popper1.14.4.js'%}"></script>
+  <script src="{% static 'js/jquery-3.3.1.js'%}"></script>
+  <script src="{% static 'js/bootstrap4.js'%}"></script>
+  <script src="{% static 'js/script.js'%}"></script>
+</body>
+</html>

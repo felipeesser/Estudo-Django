@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block corpo %}
+    <header style="margin-bottom: 48px;">
+        <nav class="navbar navbar-dark navbar-expand-md fixed-top" style="background-color: #212529;">
+            <div class="container-fluid">
+                <a href="../" class="navbar-brand font-weight-bold">Ingresso.com</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu"
+                    aria-controls="menu" aria-expanded="false" aria-label="Botão de Navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="menu" class="collapse navbar-collapse">
+                    <div class="navbar-nav ml-auto">
+                        <a data-toggle="popover" data-html="true"
+                            title="<div class='row'><div class='col-7'>Ainda não é cliente Ingresso.com ?</div><div class='col-5'>Cliente ingresso.com </div></div>"
+                            data-content="<div class='row'><div class='col-7'>Compre ingressos e combos de pipoca para ir ao cinema com segurança e mais comodidade!<br><a href='../usuario'>Criar nova conta</a></div><div class='col-5'><a href='../usuario'>Entrar na minha conta</a></div></div>"
+                            data-placement="bottom" class="nav-item nav-link" href="#"><i class="fas fa-user"></i> Olá,
+                            Visitante<span class="badge badge-dark">1</span>
+                            <span class="sr-only">unread messages</span></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid pb-4 pt-4 bg-dark">
+        <div class="row">
+            <div class="col-12 pb-5">
+                <h5 class="font-weight-bold text-light">Atendimento</h5>
+                <form class="form-inline">
+                    <input class="form-control bg-light border-right-0 border-top-0 border-bottom-0" type="search"
+                        placeholder="Qual é a sua dúvida?" aria-label="Search"
+                        style="border-radius: 5px 0px 0px 5px ; width: 290px;">
+                    <button class="btn btn btn-light my-2 my-sm-0 " type="submit"
+                        style="border-radius: 0px 5px 5px 0px;"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <div class="col-md-7 col-sm-12">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="font-weight-bold text-light pb-2">Principais categorias</h5>
+                    </div>
+                    {% for categoria in categorias %}
+                    <div class="col-sm-6 d-flex align-items-stretch ">
+                        <div class="card w-100 border-0 text-light mb-4" style="background-color: #212529;">
+                            <div class="card-body d-flex flex-row ">
+                                <i class="fa-2x {{categoria.icone}} pt-2 mr-3"></i>
+                                <div>
+                                    <h5 class="card-title"><a href="#">{{categoria.titulo}}</a></h5>
+                                    <p class="card-text">{{categoria.corpo}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-12 " style="font-size: small;">
+                <div>
+                    <h5 class="font-weight-bold text-light pb-2">Não encontrou o que procurava?</h5>
+                    <button class="btn btn-outline-primary mb-4">FALE CONOSCO</button>
+                    <h5 class="font-weight-bold text-light">Dúvidas Frequentes</h5>
+                </div>
+                <ul class="list-group list-group-flush text-light">
+                    {%for duvida in duvidas%}
+                    <li class="list-group-item bg-dark"><a href="#">{{duvida.texto}}</a>
+                    </li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

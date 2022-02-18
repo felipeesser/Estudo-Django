@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load static %}
+{% block corpo %}
+  <header>
+    <nav class="navbar navbar-dark navbar-expand-md fixed-top" style="background-color: #212529;">
+      <div class="container-fluid">
+        <a href="../" class="navbar-brand font-weight-bold">Ingresso.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu"
+          aria-expanded="false" aria-label="Botão de Navegação">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="menu" class="collapse navbar-collapse">
+          <div class="navbar-nav ml-auto">
+            <form id="navbar-search" class="form-inline mr-5 d-none d-xl-flex">
+              <input class="form-control-sm bg-light border-right-0 border-top-0 border-bottom-0" type="search"
+                placeholder="Pesquise por filmes,cinemas..." aria-label="Search"
+                style="border-radius: 5px 0px 0px 5px ; width: 290px;border-left: 6px solid gray;">
+              <button class="btn btn-sm btn-light my-2 my-sm-0 " type="submit"
+                style="border-radius: 0px 5px 5px 0px;"><i class="fas fa-search"></i></button>
+            </form>
+            <a class="nav-item nav-link pr-0 d-none d-md-block" href="#"><i class="fas fa-map-marker-alt"></i></a>
+            <select class="nav-item nav-link border-0 pl-0" style="background-color: #212529;">
+             {% for cidade in cidades %}
+              <option>{{cidade.nome}}</option>
+              {% endfor %}
+            </select>
+            <a data-toggle="popover" data-html="true"
+              title="<div class='row'><div class='col-7'>Ainda não é cliente Ingresso.com ?</div><div class='col-5'>Cliente ingresso.com </div></div>"
+              data-content="<div class='row'><div class='col-7'>Compre ingressos e combos de pipoca para ir ao cinema com segurança e mais comodidade!<br><a href='../usuario'>Criar nova conta</a></div><div class='col-5'><a href='../usuario'>Entrar na minha conta</a></div></div>"
+              data-placement="bottom" class="nav-item nav-link" href="#"><i class="fas fa-user"></i> Olá, Visitante<span
+                class="badge badge-dark">1</span>
+              <span class="sr-only">unread messages</span></a>
+            <a class="nav-item nav-link" href="../atendimento"><i class="far fa-question-circle"></i> Atendimento</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <nav id="second-navbar" class="navbar navbar-dark  navbar-expand-md fixed-top"
+      style="background-color: #212529b0;margin-top: 48px; z-index: 3;">
+      <div class="container-fluid">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link" href="#">FILMES</a>
+          <a class="nav-item nav-link" href="#">CINEMAS</a>
+          <a class="nav-item nav-link active" href="noticias.html">NOTÍCIAS</a>
+          <a class="nav-item nav-link" href="#">PREVENÇÕES</a>
+          <a class="nav-item nav-link" href="#"><i class="fas fa-shopping-bag "></i> FANSHOP</a>
+          <a class="nav-item nav-link" href="#">ROCK IN RIO</a>
+        </div>
+      </div>
+    </nav>
+    <nav class="navbar navbar-dark navbar-expand-md fixed-bottom d-sm-flex d-md-none "
+      style="background-color: #212529;">
+      <div class="container-fluid">
+        <div class="navbar-nav ml-auto mr-auto">
+          <div class="row">
+            <div class="col-3"><a class="nav-item nav-link" href="#">FILMES</a></div>
+            <div class="col-3"><a class="nav-item nav-link" href="#">CINEMAS</a></div>
+            <div class="col-3"><a class="nav-item nav-link active" href="noticias.html">NOTÍCIAS</a></div>
+            <div class="col-3"><a class="nav-item nav-link" href="#">PREVENÇÕES</a></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div id="carousel-principal" class="carousel slide d-none d-md-block " data-ride="carousel" data-interval="8000">
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
+      {% if carrossel.count > 1 %}
+      <li data-target="#carousel-id" data-slide-to="1"></li>
+      {%endif%}
+    </ol>
+    <div class="carousel-inner">
+        <div class="bgimage-not carousel-item active" style="background-image: url({% static 'images/'%}{{noticias.0.imagem}});">
+          <div class="carousel-caption">
+            <div class="text-left">
+              <span class="texto-cartaz">{{carrossel.0.titulo}}</span><br>
+              <span>{{carrossel.0.corpo}}</span><br>
+            </div>
+          </div>
+        </div>
+        {% if carrossel.count > 1 %}
+        <div class="bgimage-not carousel-item " style="background-image: url({% static 'images/'%}{{noticias.1.imagem}});">
+          <div class="carousel-caption">
+            <div class="text-left">
+              <span class="texto-cartaz">{{carrossel.1.titulo}}</span><br>
+              <span>{{carrossel.1.corpo}}</span><br>
+            </div>
+          </div>
+        </div>
+      {%endif%}
+
+
+    </div>
+    {% if carrossel.count > 1 %}
+    <a href="#carousel-principal" class="carousel-control-prev" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true">
+        <span class="sr-only">Anterior</span>
+      </span>
+    </a>
+    <a href="#carousel-principal" class="carousel-control-next" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true">
+        <span class="sr-only">Próximo</span>
+      </span>
+    </a>
+    {%endif%}
+  </div>
+  <div class="bg-dark mt-5 mt-md-0">
+    <div class="container pt-5">
+      <div class="row">
+        <div class="col">
+      <form class="mr-3" action="" method="get">
+        <div class="form-group row">
+          <label for="id_titulo" class="col-lg-2 col-form-label font-weight-bold" style="color:white">Titulo</label>
+          <div class="col-lg-10">
+            {{ form.titulo }}
+          </div>
+
+            <div class="col-lg-10 offset-lg-2">
+              <button type="submit" class="btn btn-primary">
+                Pesquisa
+              </button>
+            </div>
+
+        </div>
+      </form>
+        </div>
+        <div class="col"><a href="../noticia/cadastro_noticia/"><i class="fas fa-2x fa-plus"></i></a>
+    </div>
+          </div>
+
+      <div class="row mt-3">
+        {% for noticia in noticias %}
+          <div class="col-md-6 col-sm-12">
+            <div class="card text-light mb-4" style="background-color: #212529;">
+              <a href="{% url 'noticia:exibe_noticia' noticia.id %}">
+              <img src="{% static 'images/'%}{{noticia.imagem}}" class="card-img-top">
+              </a>
+              <div class="card-body">
+                <h5 class="card-title">{{noticia.titulo}}</h5>
+                <p class="card-text">{{noticia.corpo}}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="bg-dark pb-5" aria-label="Navegação de página exemplo">
+    {% if noticias.has_other_pages %}
+      <ul class="pagination justify-content-center mb-0">
+        {% if noticias.has_previus %}
+        <li class="page-item">
+          <a class="page-link bg-dark border-0" href="?pagina={{ noticias.previus_page_number }}" aria-label="Anterior">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Anterior</span>
+          </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link bg-dark border-0" href="#" tabindex="-1" aria-label="Anterior">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Anterior</span>
+          </a>
+        </li>
+        {% endif %}
+        {% for i in noticias.paginator.page_range %}
+          {% if noticias.number == i %}
+            <li class="page-item active"><a class="page-link bg-dark border-0" href="#">{{ i }}</a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link bg-dark border-0" href="?pagina={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if noticias.has_next %}
+          <li class="page-item">
+            <a class="page-link bg-dark border-0" href="?pagina={{ noticias.next_page_number }}" aria-label="Próximo">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Próximo</span>
+            </a>
+          </li>
+        {% else %}
+          <li class="page-item disabled ">
+              <a class="page-link bg-dark border-0" href="#" aria-label="Próximo">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Próximo</span>
+              </a>
+          </li>
+        {% endif %}
+      </ul>
+    {% endif %}
+  </div>
+{% endblock %}

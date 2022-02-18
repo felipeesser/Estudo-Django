@@ -1,0 +1,353 @@
+{% extends "base.html" %}
+{% load static %}
+{% block corpo %}
+<header>
+    <nav class="navbar navbar-dark navbar-expand-md fixed-top" style="background-color: #212529;">
+      <div class="container-fluid">
+        <a href="#" class="navbar-brand font-weight-bold">Ingresso.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu"
+          aria-expanded="false" aria-label="Botão de Navegação">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="menu" class="collapse navbar-collapse">
+          <div class="navbar-nav ml-auto">
+            <form id="navbar-search" class="form-inline mr-5 d-none d-xl-flex">
+              <input class="form-control-sm bg-light border-right-0 border-top-0 border-bottom-0" type="search"
+                placeholder="Pesquise por filmes,cinemas..." aria-label="Search"
+                style="border-radius: 5px 0px 0px 5px ; width: 290px;border-left: 6px solid gray;">
+              <button class="btn btn-sm btn-light my-2 my-sm-0 " type="submit"
+                style="border-radius: 0px 5px 5px 0px;"><i class="fas fa-search"></i></button>
+            </form>
+            <a class="nav-item nav-link pr-0 d-none d-md-block" href="#"><i class="fas fa-map-marker-alt"></i></a>
+            <select class="nav-item nav-link border-0 pl-0" style="background-color: #212529;">
+              {% for cidade in cidades %}
+              <option>{{cidade.nome}}</option>
+              {% endfor %}
+            </select>
+            <a data-toggle="popover" data-html="true"
+              title="<div class='row'><div class='col-7'>Ainda não é cliente Ingresso.com ?</div><div class='col-5'>Cliente ingresso.com </div></div>"
+              data-content="<div class='row'><div class='col-7'>Compre ingressos e combos de pipoca para ir ao cinema com segurança e mais comodidade!<br><a href='usuario/'>Criar nova conta</a></div><div class='col-5'><a href='usuario/'>Entrar na minha conta</a></div></div>"
+              data-placement="bottom" class="nav-item nav-link" href="#"><i class="fas fa-user"></i> Olá, Visitante<span
+                class="badge badge-dark">1</span>
+              <span class="sr-only">unread messages</span></a>
+            <a class="nav-item nav-link" href="atendimento/"><i class="far fa-question-circle"></i> Atendimento</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <nav id="second-navbar" class="navbar navbar-dark  navbar-expand-md fixed-top"
+      style="background-color: #212529b0;margin-top: 48px; z-index: 3;">
+      <div class="container-fluid">
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link" href="#">FILMES</a>
+          <a class="nav-item nav-link" href="#">CINEMAS</a>
+          <a class="nav-item nav-link" href="noticias/">NOTÍCIAS</a>
+          <a class="nav-item nav-link" href="#">PREVENÇÕES</a>
+          <a class="nav-item nav-link" href="#"><i class="fas fa-shopping-bag "></i> FANSHOP</a>
+          <a class="nav-item nav-link" href="#">ROCK IN RIO</a>
+        </div>
+      </div>
+    </nav>
+    <nav class="navbar navbar-dark navbar-expand-md fixed-bottom d-sm-flex d-md-none "
+      style="background-color: #212529;">
+      <div class="container-fluid">
+        <div class="navbar-nav ml-auto mr-auto">
+          <div class="row">
+            <div class="col-3"><a class="nav-item nav-link" href="#">FILMES</a></div>
+            <div class="col-3"><a class="nav-item nav-link" href="#">CINEMAS</a></div>
+            <div class="col-3"><a class="nav-item nav-link" href="noticias.html">NOTÍCIAS</a></div>
+            <div class="col-3"><a class="nav-item nav-link" href="#">PREVENÇÕES</a></div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div id="carousel-principal" class="carousel slide d-none d-md-block " data-ride="carousel" data-interval="8000">
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
+      {% if filmes.count > 1 %}
+      <li data-target="#carousel-id" data-slide-to="1"></li>
+      {%endif%}
+    </ol>
+    <div class="carousel-inner">
+      <div class="bgimage carousel-item active" style="background-image: url({% static 'images/'%}{{filmes.0.imagem}});">
+        <div class="carousel-caption">
+          <div class="text-left">
+            <span class="texto-cartaz">{{filmes.0.titulo}}</span><br>
+            <span class="tag texto-tema">{{filmes.0.genero}}</span><br>
+          </div>
+        </div>
+      </div>
+      {% if filmes.count > 1 %}
+      <div class="bgimage carousel-item" style="background-image: url({% static 'images/'%}{{filmes.1.imagem}});">
+        <div class="carousel-caption">
+          <div class="text-left">
+            <span class="texto-cartaz">{{filmes.1.titulo}}</span><br>
+            <span class="tag texto-tema">{{filmes.1.genero}}</span><br>
+          </div>
+        </div>
+      </div>
+      {%endif%}
+    </div>
+    {% if filmes.count > 1 %}
+    <a href="#carousel-principal" class="carousel-control-prev" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true">
+        <span class="sr-only">Anterior</span>
+      </span>
+    </a>
+    <a href="#carousel-principal" class="carousel-control-next" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true">
+        <span class="sr-only">Próximo</span>
+      </span>
+    </a>
+    {%endif%}
+  </div>
+
+  <div style="background-color: #212529;">
+    <div class="pt-5 pb-5 container-fluid pl-4 pr-4 mt-5 mt-md-0">
+      <h5 style="color: white;">EM CARTAZ <a href="#"> ver mais</a></h5>
+      <div>
+        <div id="grande-carousel" class="carousel slide d-none d-xl-flex" data-ride="carousel" data-interval="false">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                {% for filme in filmes|slice:":4" %}
+                <div class="col-3"><img src="{% static 'images/'%}{{filme.imagem}}"></div>
+                {% endfor %}
+              </div>
+            </div>
+            {% if filmes.count > 4 %}
+            <div class="carousel-item">
+              <div class="row">
+                {% for filme in filmes|slice:"4:8" %}
+                <div class="col-3"><img src="{% static 'images/'%}{{filme.imagem}}"></div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+          </div>
+          {% if filmes.count > 4 %}
+          <a class="carousel-control-prev" href="#grande-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#grande-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+          {% endif %}
+        </div>
+        <div id="pequeno-carousel" class="carousel slide d-sm-flex d-xl-none" data-ride="carousel" data-interval="false">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                {% for filme in filmes|slice:":3" %}
+                <div class="col-4"><img src="{% static 'images/'%}{{filme.imagem}}"></div>
+                {% endfor %}
+              </div>
+            </div>
+            {% if filmes.count > 3 %}
+            <div class="carousel-item">
+              <div class="row">
+                {% for filme in filmes|slice:"3:6" %}
+                <div class="col-4"><img src="{% static 'images/'%}{{filme.imagem}}"></div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+          </div>
+          {% if filmes.count > 3 %}
+          <a class="carousel-control-prev" href="#pequeno-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#pequeno-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-5" style="background-color: #171a1d;">
+      <div class="pt-5 pb-5 container-fluid pl-4 pr-4">
+        <h5 style="color: white;">FANSHOP <a href="#"> ver mais</a></h5>
+        <div>
+          <div id="carousel-fanshop" class="carousel slide d-none d-md-block " data-ride="carousel"
+            data-interval="false">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row">
+                  {% for loja in lojas|slice:":3" %}
+                  <div class="col-4"><img class="w-100" src="{% static 'images/'%}{{loja.imagem}}"></div>
+                  {% endfor %}
+                </div>
+              </div>
+              {% if lojas.count > 3 %}
+              <div class="carousel-item">
+                <div class="row">
+                  {% for loja in lojas|slice:"3:6" %}
+                  <div class="col-4"><img class="w-100" src="{% static 'images/'%}{{loja.imagem}}"></div>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% if lojas.count > 3 %}
+            <a class="carousel-control-prev" href="#carousel-fanshop" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-fanshop" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+            {% endif %}
+          </div>
+          <div id="carousel-sm-fanshop" class="carousel slide d-block d-md-none" data-ride="carousel"
+            data-interval="false">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row">
+                  {% for loja in lojas %}
+                  <div class="col-6"><img class="w-100" src="{% static 'images/'%}{{loja.imagem}}"></div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                  {% for loja in lojas %}
+                  <div class="col-6"><img class="w-100" src="{% static 'images/'%}{{loja.imagem}}"></div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carousel-sm-fanshop" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-sm-fanshop" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pb-5 container-fluid pl-4 pr-4">
+      <h5 style="color: white;">NOTÍCIAS EM ALTA <a href="noticias/"> ver mais</a></h5>
+      <div id="pequeno-not" class="card border-0 d-sm-flex d-md-none">
+        <img src="{%static 'images/'%}{{noticias.0.imagem}}">
+        <div class="card-body card-img-overlay  text-light d-flex justify-content-end flex-column"
+          style="background-color: #21252993">
+          <h5 class="card-title">{{noticias.0.titulo}}
+          </h5>
+          <p class="card-text">{{noticias.0.corpo}}</p>
+        </div>
+      </div>
+      <div id="medio-not" class="row d-none d-md-flex d-xl-none">
+
+        <div class="col-6">
+          <div class="card border-0">
+            <img src="{%static 'images/'%}{{noticias.0.imagem}}">
+            <div class="card-body card-img-overlay  text-light d-flex justify-content-end flex-column"
+              style="background-color: #21252993">
+              <h5 class="card-title">{{noticias.0.titulo}}
+              </h5>
+              <p class="card-text">{{noticias.0.titulo}}</p>
+            </div>
+          </div>
+        </div>
+        {% if noticias.count > 1 %}
+        <div class="col-6">
+          <div class="card border-0">
+            <img src="{%static 'images/'%}{{noticias.1.imagem}}">
+            <div class="card-body card-img-overlay  text-light d-flex justify-content-end flex-column"
+              style="background-color: #21252993">
+              <h5 class="card-title">{{noticias.1.titulo}}
+              </h5>
+              <p class="card-text">{{noticias.1.corpo}}</p>
+            </div>
+          </div>
+        </div>
+        {%endif%}
+
+      </div>
+      <div id="grande-not" class="row d-none d-xl-flex">
+        <div class="col-6">
+          <div class="card border-0">
+            <img src="{%static 'images/'%}{{noticias.0.imagem}}">
+            <div class="card-body card-img-overlay  text-light d-flex justify-content-end flex-column"
+              style="background-color: #21252993">
+              <h5 class="card-title">{{noticias.0.titulo}}
+              </h5>
+              <p class="card-text">{{noticias.0.corpo}}</p>
+            </div>
+          </div>
+        </div>
+        {% if noticias.count > 1 %}
+        <div class="col-6">
+          <div class="row mb-3">
+              <div class="col-6">
+                <div class="card border-0">
+                  <img src="{%static 'images/'%}{{noticias.1.imagem}}">
+                  <div class="card-body card-img-overlay  text-light d-flex justify-content-end flex-column"
+                    style="background-color: #21252993">
+                    <h5 class="card-title">{{noticias.1.titulo}}
+                    </h5>
+                    <p class="card-text">{{noticias.1.corpo}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="card border-0">
+                  <img src="{%static 'images/'%}{{noticias.3.imagem}}">
+                  <div class="card-body card-img-overlay  text-light d-flex justify-content-end flex-column"
+                    style="background-color: #21252993">
+                    <h5 class="card-title">{{noticias.3.titulo}}
+                    </h5>
+                    <p class="card-text">{{noticias.3.corpo}}</p>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+          <div class="row ">
+
+              <div class="col-6">
+                <div class="card border-0">
+                  <img src="{%static 'images/'%}{{noticias.2.imagem}}">
+                  <div class="card-body card-img-overlay  text-light d-flex justify-content-end flex-column"
+                    style="background-color: #21252993">
+                    <h5 class="card-title">{{noticias.2.titulo}}
+                    </h5>
+                    <p class="card-text">{{noticias.2.corpo}}</p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-6">
+                <div class="card border-0">
+                  <img src="{%static 'images/'%}{{noticias.4.imagem}}">
+                  <div class="card-body card-img-overlay  text-light d-flex justify-content-end flex-column"
+                    style="background-color: #21252993">
+                    <h5 class="card-title">{{noticias.4.titulo}}
+                    </h5>
+                    <p class="card-text">{{noticias.4.corpo}}</p>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+        {%endif%}
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}

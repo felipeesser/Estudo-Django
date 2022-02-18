@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block corpo %}
+    <nav class="navbar navbar-dark navbar-expand-md mb-3" style="background-color: #212529;">
+            <div class="container">
+                <a href="../../../" class="navbar-brand font-weight-bold">Ingresso.com</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu"
+                    aria-controls="menu" aria-expanded="false" aria-label="Botão de Navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="menu" class="collapse navbar-collapse">
+                    <div class="navbar-nav ml-auto">
+                        <a data-toggle="popover" data-html="true" title="<a href='#'>Meus pedidos</a>"
+                            data-content="<a href='#'>Dados Pessoais</a><br><a href='#'>Formas de Pagamento</a><br><a href='#'>Sair da conta</a>"
+                            data-placement="bottom" class="nav-item nav-link" href="#">Olá, Visitante <i
+                                class="fas fa-user"></i><span class="badge badge-dark">1</span>
+                            <span class="sr-only">unread messages</span></a>
+                        <a class="nav-item nav-link" href="../atendimento/">Atendimento <i class="far fa-question-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+    </nav>
+    {% if messages %}
+        <div class="mb-3">
+            {% for message in messages %}
+                <ul class="list-group rounded">
+                    <li class="list-group-item list-group-item-info" style="padding-top:7px;padding-bottom:7px">
+                        {{ message }}
+                    </li>
+                </ul>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="container">
+        <div class="row mb-2" >
+        <div class="col-lg-3 col-md-4">
+            <img class="mr-3 w-100" src="{% static 'images/' %}{{ noticia.imagem }}" alt="{{noticia.titulo}}">
+        </div>
+        <div class="col-lg-9 col-md-8">
+            <div class="col-xl-2 col-lg-3 col-4 font-weight-bold mb-1">Titulo</div>
+            <div class="col-xl-10 col-lg-9 col-8 ">{{ noticia.titulo }}</div>
+            <div class="col-xl-2 col-lg-3 col-4 font-weight-bold mb-1">Corpo</div>
+            <div class="col-xl-10 col-lg-9 col-8 ">{{ noticia.corpo }}</div>
+        </div>
+    </div>
+        {% if noticia.id %}
+        <div class="form-group row" >
+        <div class="col-12">
+            <div class="form-inline">
+                <a href="{% url 'noticia:edita_noticia' noticia.id %}" class="btn btn-primary mr-3">
+                    Editar
+                </a>
+                <form action="{% url 'noticia:remove_noticia' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger mr-3">
+                    Deletar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+        {% endif %}
+    </div>
+{% endblock %}

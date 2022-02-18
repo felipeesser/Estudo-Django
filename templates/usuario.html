@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load static %}
+{% block corpo %}
+    <div class="toast d-none d-md-block" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000"
+        style="position: absolute; top: 69px; right: 0; z-index: 3;">
+        <div class="toast-header">
+            <strong class="mr-auto">Promoção</strong>
+            <small>now</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Você ganhou {{promocoes.0.promocao}}
+        </div>
+    </div>
+
+    <header>
+        <nav class="navbar navbar-dark navbar-expand-md fixed-top" style="background-color: #212529;">
+            <div class="container">
+                <a href="../" class="navbar-brand font-weight-bold">Ingresso.com</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu"
+                    aria-controls="menu" aria-expanded="false" aria-label="Botão de Navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="menu" class="collapse navbar-collapse">
+                    <div class="navbar-nav ml-auto">
+                        <a data-toggle="popover" data-html="true" title="<a href='#'>Meus pedidos</a>"
+                            data-content="<a href='#'>Dados Pessoais</a><br><a href='#'>Formas de Pagamento</a><br><a href='#'>Sair da conta</a>"
+                            data-placement="bottom" class="nav-item nav-link" href="#">Olá, Visitante <i
+                                class="fas fa-user"></i><span class="badge badge-dark">1</span>
+                            <span class="sr-only">unread messages</span></a>
+                        <a class="nav-item nav-link" href="../atendimento/">Atendimento <i class="far fa-question-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="my-btn-group" class="container" style="margin-top: 56px;">
+        <div class="row mb-5">
+            <div class="col-sm-12 col-md-4 pt-4">
+                <div class="d-none d-md-block">
+                    <h5 class="mb-4">Olá, usuario.<br>
+                        Bem-vindo à sua conta :)
+                    </h5>
+                    <a href="#">sair da conta</a>
+                    <p>voltar para a <a href="#">página principal</a></p>
+                </div>
+                <div id="id-btn-group-vertical"
+                    class="btn-group-vertical btn-group-lg btn-group-toggle text-left d-none d-md-flex"
+                    data-toggle="buttons">
+                    <label class="btn btn-secondary text-left" data-target="#id-pedidos" data-toggle="collapse">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked><i
+                            class="fas fa-ticket-alt"></i> Meus
+                        Pedidos
+                    </label>
+                    <label class="btn btn-secondary text-left" data-target="#id-promocao" data-toggle="collapse">
+                        <input type="radio" name="options" id="option2" autocomplete="off"><i class="fas fa-tag"></i>
+                        Promoções
+                    </label>
+                    <label class="btn btn-secondary active text-left" data-target="#id-form" data-toggle="collapse">
+                        <input type="radio" name="options" id="option3" autocomplete="off"><i class="fas fa-list"></i>
+                        Dados Pessoais
+                    </label>
+                    <label class="btn btn-secondary text-left" data-target="#id-pagamento" data-toggle="collapse">
+                        <input type="radio" name="options" id="option4" autocomplete="off"><i
+                            class="fas fa-credit-card"></i> Formas
+                        de Pagamento
+                    </label>
+                </div>
+            </div>
+            <div id="id-promocao" class="collapse col-sm-12 col-md-8 pt-4" data-parent="#my-btn-group">
+                <div class="row">
+                    {% for promocao in promocoes %}
+                    <div class="col-12">
+                        <div class="card border-0 text-light mb-4" style="background-color: #212529;">
+                            <div class="card-body d-flex justify-content-left">
+                                <div>
+                                    <h5 class="card-title"><i class="fas fa-tag pt-3 mr-2"></i><a href="#">{{promocao.promocao}}</a></h5>
+                                    <p class="card-text">{{promocao.corpo}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="id-pedidos" class="collapse col-sm-12 col-md-8 pt-4" data-parent="#my-btn-group">
+                <h5>Você não realizou nenhum pedido :(</h5>
+            </div>
+            <div id="id-pagamento" class="collapse col-sm-12 col-md-8 pt-4" data-parent="#my-btn-group">
+                <i class="fas fa-2x fa-credit-card"></i>
+                <p> <b>PAGUE COM O CARTÃO DE DÉBITO VIRTUAL SPRIBLES</b><br>
+
+                    Antes de realizar a compra, é necessário gerar, gratuitamente, o seu cartão de débito virtual SPRIBLES.<br>
+                    
+                    Acesse o Internet Banking, pelo site ou pelo App SPRIBLES, na opção<br>
+                    "Cartões – Cartão de Débito Virtual".<br>
+                    
+                    Insira o número completo, a validade e o código de segurança gerados.<br>
+                    
+                    Um novo código de segurança deverá ser gerado no Internet Banking, a cada compra, para maior segurança no uso dos serviços da Ingresso.com.</p>
+            </div>
+            <div id="id-form" class="collapse show col-sm-12 col-md-8 pt-4" data-parent="#my-btn-group">
+                <form class="mb-5">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="Data de aniversário">
+                        </div>
+                        <select class="form-control col-4">
+                            <option>prefiro não informar</option>
+                            <option>Masculino</option>
+                            <option>Feminino</option>
+                        </select>
+                        <div class="form-group col-4">
+                            <input type="password" class="form-control" id="inputPassword4" placeholder="CPF">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="Telefone">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="CEP">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="Logradouro">
+                        </div>
+                        <div class="form-group col-2">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="Número">
+                        </div>
+                        <div class="form-group col-3">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="Complemento">
+                        </div>
+                        <div class="form-group col-3">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="Referência">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="Bairro">
+                        </div>
+                        <select class="form-control col-4">
+                            <option>Estado</option>
+                            <option>RJ</option>
+                            <option>SP</option>
+                        </select>
+                        <div class="form-group col-4">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="Cidade">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="novidades" id="novidades">
+                            <label class="form-check-label" for="novidades">
+                                Quero receber novidades e mensagens da Ingresso.com.
+                            </label>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <p>O uso de nosso site e aplicativo é regulado por nossos Termos de Uso. Maiores informações sobre
+                        como usamos seus dados pessoais podem ser encontradas em nossa Política de Privacidade e
+                        Política de Cookies.</p>
+                    <p>Deseja excluir sua conta? Siga os passos a seguir.</p>
+                </div>
+                <div class="alert alert-warning d-flex justify-content-center" role="alert">
+                    <i class="fas fa-exclamation-circle pr-3 pt-3"></i>
+                    <p class="mb-0">
+                        Procure manter sempre seus dados atualizados! Em caso de dúvidas, a Ingresso.com poderá entrar
+                        em
+                        contato para checagem e detalhamento dos dados informados no cadastro.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="id-btn-group-horizontal" class="btn-group btn-group-md btn-group-toggle mb-5 d-sm-flex d-md-none "
+            data-toggle="buttons">
+            <label class="btn btn-secondary text-left" data-target="#id-pedidos" data-toggle="collapse">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked><i
+                    class="fas fa-ticket-alt"></i> Meus
+                Pedidos
+            </label>
+            <label class="btn btn-secondary text-left" data-target="#id-promocao" data-toggle="collapse">
+                <input type="radio" name="options" id="option2" autocomplete="off"><i class="fas fa-tag"></i>
+                Promoções
+            </label>
+            <label class="btn btn-secondary active text-left" data-target="#id-form" data-toggle="collapse">
+                <input type="radio" name="options" id="option3" autocomplete="off"><i class="fas fa-list"></i>
+                Dados Pessoais
+            </label>
+            <label class="btn btn-secondary text-left" data-target="id-pagamento" data-toggle="collapse">
+                <input type="radio" name="options" id="option3" autocomplete="off"><i class="fas fa-credit-card"></i>
+                Formas
+                de Pagamento
+            </label>
+        </div>
+        <footer>
+            <p class="border-top border-dark pt-5" style="text-align: center; font-size: small;">Lorem ipsum dolor sit
+                amet consectetur adipisicing elit. Fugit ad alias quasi rem explicabo? Quasi voluptatem qui eveniet?
+                Ducimus veniam laudantium modi expedita obcaecati sed amet laboriosam! Excepturi, voluptatem assumenda.
+            </p>
+        </footer>
+    </div>
+{% endblock %}
+{% block rodape %}
+{% endblock %}
